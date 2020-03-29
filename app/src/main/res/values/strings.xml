@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">ماشین حساب</string>
+    <string name="back_icon">&#x21e6;</string>
+    <string name="div_icon">&#xf7;</string>
+    <string name="multiply_icon">&#xd7;</string>
+</resources>
