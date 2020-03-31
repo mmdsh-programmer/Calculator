@@ -54,6 +54,7 @@
                 android:layout_weight="6"
                 android:background="#bbb"
                 android:minHeight="70dp"
+                android:onClick="onClear"
                 android:text="C"
                 android:textSize="25sp" />
 

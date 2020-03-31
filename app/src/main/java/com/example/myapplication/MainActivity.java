@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
     String num,operator,history;
     TextView show_result;
     TextView show_main_result;
-    double first,second;
+    double first,second,tmp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
             second += first;
         }
         else if (operator == "-"){
-            second-= first;
+            second -= first;
         }
         else if(operator == "*"){
             second *= first;
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onMinus(View view){
         if (operator == ""){
-            second -= first;
+            second = Double.parseDouble(show_main_result.getText().toString());
         }
         else{
             checkOperator();
@@ -110,6 +110,16 @@ public class MainActivity extends AppCompatActivity {
         show_result.setText(history + first + " = ");
         show_main_result.setText(Double.toString(second));
         operator="";
+        tmp = second;
         first = 0;
+    }
+
+    public void onClear(View view){
+        first = second = 0;
+        operator = "";
+        history ="";
+        num = "";
+        show_result.setText("");
+        show_main_result.setText("");
     }
 }
