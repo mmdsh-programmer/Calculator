@@ -7,14 +7,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
-    String num,operator,history;
+    String num,operator,history,tmp;
     TextView show_result;
     TextView show_main_result;
-    double first,second,tmp;
+    double first,second;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,65 +45,86 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClick(View view){
         Button button = (Button) view;
-        num+= button.getText().toString();
+        num = show_main_result.getText().toString();
+        num += button.getText().toString();
         show_main_result.setText(num);
         first = Double.parseDouble(num);
     }
 
     public void onSum(View view){
-        if (operator == ""){
-            second += first;
+        if (show_main_result.getText().toString().length() != 0) {
+            if (operator == "") {
+                second += first;
+            } else {
+                checkOperator();
+            }
+            operator = "+";
+            history += num + " + ";
+            show_result.setText(history);
+            num = "";
+            show_main_result.setText("");
         }
         else{
-            checkOperator();
+            Toast err = Toast.makeText(getApplicationContext() , R.string.err , Toast.LENGTH_SHORT);
+            err.show();
         }
-        operator="+";
-        history += num + " + ";
-        show_result.setText(history);
-        num="";
-        show_main_result.setText("");
     }
 
     public void onMinus(View view){
-        if (operator == ""){
-            second = Double.parseDouble(show_main_result.getText().toString());
+        if (show_main_result.getText().toString().length() != 0) {
+            if (operator == "") {
+                second = Double.parseDouble(show_main_result.getText().toString());
+            } else {
+                checkOperator();
+            }
+            operator = "-";
+            history += num + " - ";
+            show_result.setText(history);
+            num = "";
+            show_main_result.setText("");
         }
         else{
-            checkOperator();
+            Toast err = Toast.makeText(getApplicationContext() , R.string.err , Toast.LENGTH_SHORT);
+            err.show();
         }
-        operator="-";
-        history += num + " - ";
-        show_result.setText(history);
-        num="";
-        show_main_result.setText("");
     }
 
     public void onMultiply(View view){
-        if (operator == ""){
-            second = Double.parseDouble(show_main_result.getText().toString());
+        if (show_main_result.getText().toString().length() != 0) {
+            if (operator == "") {
+                second = Double.parseDouble(show_main_result.getText().toString());
+            } else {
+                checkOperator();
+            }
+            operator = "*";
+            history += num + " * ";
+            show_result.setText(history);
+            num = "";
+            show_main_result.setText("");
         }
         else{
-            checkOperator();
+            Toast err = Toast.makeText(getApplicationContext() , R.string.err , Toast.LENGTH_SHORT);
+            err.show();
         }
-        operator="*";
-        history += num + " * ";
-        show_result.setText(history);
-        num="";
-        show_main_result.setText("");
     }
 
     public void onDivide(View view){
-        if (operator == ""){
-            second = Double.parseDouble(show_main_result.getText().toString());
+        if (show_main_result.getText().toString().length() != 0) {
+            if (operator == "") {
+                second = Double.parseDouble(show_main_result.getText().toString());
+            } else {
+                checkOperator();
+            }
+            operator = "/";
+            history += num + " / ";
+            show_result.setText(history);
+            num = "";
+            show_main_result.setText("");
         }
         else{
-            checkOperator();
+            Toast err = Toast.makeText(getApplicationContext() , R.string.err , Toast.LENGTH_SHORT);
+            err.show();
         }
-        operator="/";
-        history += num + " / ";
-        show_result.setText(history);
-        num="";
-        show_main_result.setText("");
     }
 
     public void onEqual(View view){
@@ -110,7 +132,6 @@ public class MainActivity extends AppCompatActivity {
         show_result.setText(history + first + " = ");
         show_main_result.setText(Double.toString(second));
         operator="";
-        tmp = second;
         first = 0;
     }
 
@@ -121,5 +142,39 @@ public class MainActivity extends AppCompatActivity {
         num = "";
         show_result.setText("");
         show_main_result.setText("");
+    }
+
+    public void onDot(View view){
+        if (show_main_result.getText().toString().length() > 0)
+        {
+            if ( show_main_result.getText().toString().contains(".")){
+                Toast dot_err = Toast.makeText(getApplicationContext() , R.string.dot_err , Toast.LENGTH_SHORT);
+                dot_err.show();
+            }
+            else{
+                show_main_result.setText(show_main_result.getText().toString() + ".");
+                num += ".";
+            }
+        }
+        else{
+            show_main_result.setText(show_main_result.getText().toString() + "0.");
+            num += "0.";
+        }
+    }
+
+    public void onBack(View view){
+        if (show_main_result.getText().toString().length() > 1){
+            tmp = show_main_result.getText().toString().substring(0, show_main_result.getText().toString().length() - 1);
+            show_main_result.setText(tmp);
+            num = tmp;
+            first = Double.parseDouble(tmp);
+        }
+        else if (show_main_result.getText().toString().length() == 1){
+            show_main_result.setText("");
+        }
+        else{
+            Toast back_err = Toast.makeText(getApplicationContext() , R.string.back_err , Toast.LENGTH_SHORT);
+            back_err.show();
+        }
     }
 }

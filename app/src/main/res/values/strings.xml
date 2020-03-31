@@ -3,4 +3,8 @@
     <string name="back_icon">&#x21e6;</string>
     <string name="div_icon">&#xf7;</string>
     <string name="multiply_icon">&#xd7;</string>
+    <string name="dot_err">استفاده از ممیز در این حالت مجاز نیست!</string>
+    <string name="back_err">امکان حذف وجود ندارد!</string>
+    <string name="err">عملیات مجاز نیست</string>
+    <string name="zero_err">صفر در ابتدا مجاز نیست!</string>
 </resources>
