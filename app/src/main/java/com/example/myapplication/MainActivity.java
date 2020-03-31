@@ -27,6 +27,21 @@ public class MainActivity extends AppCompatActivity {
         second = 0;
     }
 
+    public void checkOperator(){
+        if (operator == "+"){
+            second += first;
+        }
+        else if (operator == "-"){
+            second-= first;
+        }
+        else if(operator == "*"){
+            second *= first;
+        }
+        else if (operator == "/"){
+            second /= first;
+        }
+    }
+
     public void onClick(View view){
         Button button = (Button) view;
         num+= button.getText().toString();
@@ -36,27 +51,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void onSum(View view){
         if (operator == ""){
-            second = first;
+            second += first;
         }
         else{
-            if (operator == "+"){
-                second += first;
-            }
-            else if (operator == "-")
-            {
-                second-= first;
-            }
-            else if(operator == "*")
-            {
-                second *= first;
-            }
-            else if (operator == "/")
-            {
-                second /= first;
-            }
+            checkOperator();
         }
         operator="+";
-        history += num + "+";
+        history += num + " + ";
         show_result.setText(history);
         num="";
         show_main_result.setText("");
@@ -64,27 +65,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void onMinus(View view){
         if (operator == ""){
-            second = first;
+            second -= first;
         }
         else{
-            if (operator == "+"){
-                second += first;
-            }
-            else if (operator == "-")
-            {
-                second-= first;
-            }
-            else if(operator == "*")
-            {
-                second *= first;
-            }
-            else if (operator == "/")
-            {
-                second /= first;
-            }
+            checkOperator();
         }
         operator="-";
-        history += num + "-";
+        history += num + " - ";
         show_result.setText(history);
         num="";
         show_main_result.setText("");
@@ -92,27 +79,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void onMultiply(View view){
         if (operator == ""){
-            second = first;
+            second = Double.parseDouble(show_main_result.getText().toString());
         }
         else{
-            if (operator == "+"){
-                second += first;
-            }
-            else if (operator == "-")
-            {
-                second-= first;
-            }
-            else if(operator == "*")
-            {
-                second *= first;
-            }
-            else if (operator == "/")
-            {
-                second /= first;
-            }
+            checkOperator();
         }
         operator="*";
-        history += num + "*";
+        history += num + " * ";
         show_result.setText(history);
         num="";
         show_main_result.setText("");
@@ -120,49 +93,23 @@ public class MainActivity extends AppCompatActivity {
 
     public void onDivide(View view){
         if (operator == ""){
-            second = first;
+            second = Double.parseDouble(show_main_result.getText().toString());
         }
         else{
-            if (operator == "+"){
-                second += first;
-            }
-            else if (operator == "-")
-            {
-                second-= first;
-            }
-            else if(operator == "*")
-            {
-                second *= first;
-            }
-            else if (operator == "/")
-            {
-                second /= first;
-            }
+            checkOperator();
         }
         operator="/";
-        history += num + "/";
+        history += num + " / ";
         show_result.setText(history);
         num="";
         show_main_result.setText("");
     }
 
     public void onEqual(View view){
-        if (operator == "+"){
-            second += first;
-        }
-        else if (operator == "-")
-        {
-            second-= first;
-        }
-        else if(operator == "*")
-        {
-            second *= first;
-        }
-        else if (operator == "/")
-        {
-            second /= first;
-        }
-        show_result.setText(history + first + "=");
+        checkOperator();
+        show_result.setText(history + first + " = ");
         show_main_result.setText(Double.toString(second));
+        operator="";
+        first = 0;
     }
 }
