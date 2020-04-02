@@ -3,6 +3,8 @@ package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,10 +14,11 @@ import android.widget.Toast;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
-    String num,operator,history,tmp;
+    String num,operator,history,tmp,preview;
     TextView show_result;
     TextView show_main_result;
-    double first,second;
+    double first,second,test;
+    boolean zero_input;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,9 +26,11 @@ public class MainActivity extends AppCompatActivity {
         show_result = findViewById(R.id.result);
         show_main_result = findViewById(R.id.mainResult);
         num="";
+        preview="";
         history="";
         operator = "";
         second = 0;
+        zero_input = false;
     }
 
     public void checkOperator(){
@@ -44,6 +49,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClick(View view){
+        show_main_result.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (show_main_result.getText().toString().matches("^0"))
+                {
+                    Toast.makeText(getApplicationContext() , R.string.zero_err , Toast.LENGTH_LONG ).show();
+                    show_main_result.setText("");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
         Button button = (Button) view;
         num = show_main_result.getText().toString();
         num += button.getText().toString();
